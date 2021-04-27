@@ -1,0 +1,121 @@
+package ${thisPkg};
+
+<#list table.importPackages as pkg>
+import ${pkg};
+</#list>
+import ${superEntityClassPackage};
+<#if swagger2>
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+</#if>
+<#if entityLombokModel>
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.experimental.Accessors;
+</#if>
+<#if (cfg.idImportName)??>
+import ${cfg.idImportName};
+</#if>
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+/**
+ * <p>
+ * ${table.comment!}
+ * </p>
+ *
+ * @author ${author}
+ * @date ${date}
+ * @copyright 江西金磊科技发展有限公司 All rights reserved. Notice
+ * 仅限于授权后使用，禁止非授权传阅以及私自用于商业目的。
+ */
+<#if entityLombokModel>
+@Data
+<#if superEntityClass??>
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+<#else>
+@EqualsAndHashCode(callSuper = false)
+</#if>
+@Accessors(chain = true)
+</#if>
+@Entity(name = "${table.name?upper_case}")
+<#if swagger2>
+@ApiModel(value="${entity}对象"<#if table.comment! != ''>, description="${table.comment!}"</#if>)
+</#if>
+<#if superEntityClass??>
+public class ${entity} extends ${superEntityClass}<#if (cfg.idType)??><${cfg.idType}></#if><#if activeRecord><${entity}></#if> {
+<#elseif activeRecord>
+public class ${entity} extends Model<${entity}> {
+<#else>
+public class ${entity} implements Serializable {
+</#if>
+
+    <#if entitySerialVersionUID>
+    private static final long serialVersionUID = ${cfg.entityUid?c}L;
+    </#if>
+<#-- ----------  BEGIN 字段循环遍历  ---------->
+<#list table.fields as field>
+    <#if field.keyFlag>
+        <#assign keyPropertyName="${field.propertyName}"/>
+    </#if>
+
+    <#if field.comment!?length gt 0>
+        <#if swagger2>
+    @ApiModelProperty(value = "${field.comment}")
+        <#else>
+    /**
+     * ${field.comment}
+     */
+        </#if>
+    </#if>
+    @Column(name = "${field.name}")
+    private ${field.propertyType} ${field.propertyName};
+</#list>
+<#------------  END 字段循环遍历  ---------->
+
+<#if !entityLombokModel>
+    <#list table.fields as field>
+        <#if field.propertyType == "boolean">
+            <#assign getprefix="is"/>
+        <#else>
+            <#assign getprefix="get"/>
+        </#if>
+
+    public ${field.propertyType} ${getprefix}${field.capitalName}() {
+        return ${field.propertyName};
+    }
+
+        <#if entityBuilderModel>
+    public ${entity} set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
+        <#else>
+    public void set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
+        </#if>
+        this.${field.propertyName} = ${field.propertyName};
+        <#if entityBuilderModel>
+        return this;
+        </#if>
+    }
+    </#list>
+</#if>
+
+<#if entityColumnConstant>
+    <#list table.fields as field>
+    public static final String ${field.name?upper_case} = "${field.name}";
+
+    </#list>
+</#if>
+
+<#if !entityLombokModel>
+    @Override
+    public String toString() {
+    return "${entity}{" +
+	            "super=" + super.toString() +
+    <#list table.fields as field>
+                ", ${field.propertyName}=" + ${field.propertyName} +
+    </#list>
+           "}";
+    }
+</#if>
+}

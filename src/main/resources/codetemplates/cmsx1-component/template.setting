@@ -1,0 +1,8 @@
+logicDeleteEntity=com.jeecms.common.base.domain.AbstractIdDomain
+physicalDeleteEntity=com.jeecms.common.base.domain.AbstractIdDomain
+baseController=com.jeecms.kit.BaseController
+baseService=com.jeecms.common.base.service.IBaseService
+baseServiceImpl=com.jeecms.common.base.service.BaseServiceImpl
+baseMapperClass=com.jeecms.common.base.dao.IBaseDao
+baseMapperImplClass=com.jeecms.common.base.dao.BaseDao
+supperColumns=id,create_user,create_time,update_user,update_time,delete_flag,ID,CREATE_USER,CREATE_TIME,UPDATE_USER,UPDATE_TIME,DELETE_FLAG,DELETED_FLAG

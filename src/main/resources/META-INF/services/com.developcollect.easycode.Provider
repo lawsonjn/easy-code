@@ -1,0 +1,9 @@
+com.developcollect.easycode.provider.CodeTemplateProvider
+com.developcollect.easycode.provider.QueryDSLProvider
+com.developcollect.easycode.provider.EncodeProvider
+com.developcollect.easycode.provider.QrCodeProvider
+com.developcollect.easycode.provider.RadixProvider
+com.developcollect.easycode.provider.RegexProvider
+com.developcollect.easycode.provider.CommonCommandProvider
+com.developcollect.easycode.provider.OtherProvider
+com.developcollect.easycode.provider.fakedata.FakeDataProvider

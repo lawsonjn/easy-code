@@ -1,0 +1,92 @@
+[
+  {
+    "title": "[网络]测试网络连接",
+    "winCmd": [
+      "ping 192.168.0.1"
+    ],
+    "linuxCmd": [
+      "ping 192.168.0.1"
+    ],
+    "macCmd": [
+      "ping 192.168.0.1"
+    ]
+  },
+  {
+    "title": "[系统]查看端口",
+    "winCmd": [
+      "netstat -ano | findstr 8080"
+    ],
+    "linuxCmd": [
+      "netstat -ano | grep 8080"
+    ],
+    "macCmd": [
+      "netstat -ano | grep 8080"
+    ]
+  },
+  {
+    "title": "[系统]查看进程",
+    "winCmd": [
+      "tasklist /fi \"imagename eq java.exe\"",
+      "wmic process where caption=\"java.exe\" get processid,caption,commandline /value ",
+      "tasklist | findstr \"java\"",
+      "netstat -aont | findstr \"2001\""
+    ],
+    "linuxCmd": [
+      "ps -ef | grep java",
+      "jps -l -v"
+    ],
+    "macCmd": [
+      "ps -ef | grep java",
+      "jps -l -v"
+    ]
+  },
+  {
+    "title": "[系统]杀死进程",
+    "winCmd": [
+      "taskkill /f /t /im <进程名称>",
+      "taskkill /f /t /pid <进程号>"
+    ],
+    "linuxCmd": [
+      "kill -9 <进程号>"
+    ],
+    "macCmd": [
+      "kill -9 <进程号>"
+    ]
+  },
+  {
+    "title": "[java]查看JAVA进程",
+    "winCmd": [
+      "jps -l -v"
+    ],
+    "linuxCmd": [
+      "jps -l -v"
+    ],
+    "macCmd": [
+      "jps -l -v"
+    ]
+  },
+  {
+    "title": "[java]转存栈信息",
+    "winCmd": [
+      "jstack -l <进程号> > E://wwww.stack"
+    ],
+    "linuxCmd": [
+      "jstack -l <进程号> > /wwww.stack"
+    ],
+    "macCmd": [
+      "jstack -l <进程号> > /wwww.stack"
+    ]
+  },
+  {
+    "title": "[java]转存内存",
+    "winCmd": [
+      "jmap -dump:format=b,file=heap.hprof <进程号>"
+    ],
+    "linuxCmd": [
+      "jmap -dump:format=b,file=heap.hprof <进程号>"
+    ],
+    "macCmd": [
+      "jmap -dump:format=b,file=heap.hprof <进程号>"
+    ]
+  }
+]

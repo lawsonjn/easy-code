@@ -1,0 +1,54 @@
+<configuration>
+    <!-- definition of appender STDOUT -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <!--    <appender name="fileAppender" class="ch.qos.logback.core.FileAppender">-->
+    <!--        <file>${user.home}/easy-code/logs/EasyCode.log</file>-->
+    <!--        <encoder>&lt;!&ndash; 必须指定，否则不会往文件输出内容 &ndash;&gt;-->
+    <!--            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n</pattern>-->
+    <!--        </encoder>-->
+    <!--        <append>true</append>-->
+    <!--        <prudent>false</prudent>-->
+    <!--    </appender>-->
+
+    <appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <file>${user.home}/easy-code/logs/EasyCode.log</file>
+
+        <encoder charset="utf-8">
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n</pattern>
+        </encoder>
+
+        <!--        <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+        <!--            <level>INFO</level>-->
+        <!--            <onMatch>ACCEPT</onMatch>-->
+        <!--            <onMismatch>DENY</onMismatch>-->
+        <!--        </filter>-->
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${user.home}/easy-code/logs/EasyCode.log.%i.gz</fileNamePattern>
+            <!-- 最多存留3个文件 -->
+            <minIndex>1</minIndex>
+            <maxIndex>3</maxIndex>
+        </rollingPolicy>
+
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <!-- 单文件最大5MB -->
+            <maxFileSize>5MB</maxFileSize>
+        </triggeringPolicy>
+
+    </appender>
+
+
+    <root level="INFO">
+        <!-- appender referenced after it is defined -->
+        <appender-ref ref="fileAppender"/>
+    </root>
+
+    <logger name="com.developcollect" level="debug"/>
+    <logger name="org.reflections.Reflections" level="error"/>
+</configuration>

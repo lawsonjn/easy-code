@@ -1,0 +1,8 @@
+logicDeleteEntity=com.jeecms.common.jpa.LogicDeleteEntity
+physicalDeleteEntity=com.jeecms.common.jpa.PhysicDeleteEntity
+baseController=com.jeecms.common.kit.BaseController
+baseService=com.jeecms.common.jpa.IService
+baseServiceImpl=com.jeecms.common.jpa.ServiceImpl
+baseMapperClass=com.jeecms.common.jpa.CommonRepository
+baseMapperImplClass=com.jeecms.common.jpa.BaseRepositoryImpl
+supperColumns=id,create_user,create_time,update_user,update_time,delete_flag

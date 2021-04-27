@@ -1,0 +1,6 @@
+logicDeleteEntity=com.jeecms.market.kit.BaseEntity
+physicalDeleteEntity=com.jeecms.market.kit.PhysicalDeleteEntity
+baseController=com.jeecms.market.kit.BaseController
+baseService=com.jeecms.market.kit.BaseService
+baseServiceImpl=com.jeecms.market.kit.BaseServiceImpl
+supperColumns=id,create_user,create_time,update_user,update_time,delete_flag
